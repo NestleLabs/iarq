@@ -8,7 +8,7 @@
     1. start dns server
     ```ruby
     cd <to-project-directory>
-    ./server
+    ./server udp 127.0.0.1 53 domain.org
     ```
     
     2. query dns

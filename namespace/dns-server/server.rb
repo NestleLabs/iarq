@@ -35,7 +35,8 @@ end
 
 params = lambda do
     if ARGV.size < 1
-        puts "Usage: protocol://ipv4:port:domain"
+        #puts "Usage: protocol://ipv4:port:domain"
+        puts "Usage: [protocol] [address] [port] [domain]"
         exit
     end
     {protocol: ARGV[0] || 'udp', address: ARGV[1] || '127.0.0.1', port: ARGV[2] || 12333}
