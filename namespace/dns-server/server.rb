@@ -24,12 +24,20 @@ class DNSServer < Async::DNS::Server
     end
     def process name, resource_class, transaction
         @resolver ||= Async::DNS::Resolver.new google_dns
-        # pp @resolver
-        transaction.passthrough! @resolver
+        if name =~ /#{ARGV[3]}/ # change pattern to domain
+            pp "catch question: #{name} response catch answer: #{transaction.respond!("127.0.0.1").map {|answer| answer.address}}"
+        else
+            transaction.passthrough! @resolver
+            pp "answer #{name}"
+        end
     end
 end
 
 params = lambda do
+    if ARGV.size < 1
+        puts "Usage: protocol://ipv4:port:domain"
+        exit
+    end
     {protocol: ARGV[0] || 'udp', address: ARGV[1] || '127.0.0.1', port: ARGV[2] || 12333}
 end.call
 
