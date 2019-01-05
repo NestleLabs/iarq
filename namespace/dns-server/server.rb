@@ -23,6 +23,7 @@ class DNSServer < Async::DNS::Server
         DNSObject.new(address: '8.8.8.8', port: 53).to_a
     end
     def process name, resource_class, transaction
+        pp "name: #{name}"
         @resolver ||= Async::DNS::Resolver.new google_dns
         if name =~ /#{ARGV[3]}/ # change pattern to domain
             pp "catch question: #{name} response catch answer: #{transaction.respond!("127.0.0.1").map {|answer| answer.address}}"
