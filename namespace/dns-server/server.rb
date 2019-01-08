@@ -29,7 +29,7 @@ class DNSServer < Async::DNS::Server
             pp "catch question: #{name} response catch answer: #{transaction.respond!("127.0.0.1").map {|answer| answer.address}}"
         else
             transaction.passthrough! @resolver
-            pp "answer #{name}"
+            #pp "answer #{name}" if name =~ /example/
         end
     end
 end
